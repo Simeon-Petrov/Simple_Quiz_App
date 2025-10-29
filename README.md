@@ -1,141 +1,109 @@
-\# Spring MVC Quiz Application
-
+# Spring MVC Quiz Application
 
 ## Project Overview
 
+This is a **web-based quiz application** built using **Spring Boot** and **Spring MVC** with **Thymeleaf** for templating.  
+The quiz loads questions from a JSON file, features advanced **time management** on the server side, and includes **dynamic navigation and custom styling**.
 
-This is a web-based quiz application built using Spring Boot and Spring MVC with Thymeleaf for templating. The quiz loads questions from a JSON file, features advanced time management on the server side, and includes dynamic navigation and styling.
+---
 
+## Key Features Implemented
 
+- **Interactive Countdown Timer:**  
+  A 10-minute total timer managed accurately by the server and visually updated on the client side via JavaScript.
 
-\## Key Features Implemented:
+- **Time Management:**  
+  Quiz start time is tracked using `HttpSession` to ensure the countdown remains accurate even when navigating between questions.
 
+- **Navigation:**  
+  Allows *Next / Previous* / Submit* navigation between questions.
 
-Interactive Countdown Timer: A 10-minute total timer managed accurately by the server and visually updated on the client side via JavaScript.
+- **Progress Tracking:**  
+  Displays progress as **"Question X of Y"**.
 
-Time Management: Quiz start time is tracked using HttpSession to ensure the countdown is accurate even when navigating between questions.
+- **Shuffling:**  
+  Randomly shuffles both the **questions** and **answers** each time the quiz is loaded.
 
-Navigation: Allows Next / Previous navigation between questions.
-Progress Tracking: Displays progress as "Question X of Y".
-Shuffling: Implements logic to randomly shuffle the questions and the answers each time the quiz is loaded.
-Theming: Custom color palette implemented via style.css (dark purple theme).
-Results: Displays the final score and highlights incorrect answers with the correct solution.
+- **Theming:**  
+  Custom color palette implemented via `style.css` (dark purple theme).
+
+- **Results:**  
+  Displays the final score and highlights incorrect answers with the correct solution.
+
+---
 
 ## Technologies Used
 
+| Category    | Technology              | Version / Role |
+|--------------|--------------------------|----------------|
+| **Backend** | Java Development Kit (JDK) | 17+ |
+| **Framework** | Spring Boot | 3+ |
+| **Web** | Spring MVC | Controller, Session Management |
+| **Templating** | Thymeleaf | Dynamic HTML generation |
+| **Data** | Jackson | JSON serialization/deserialization |
 
-Category             Technology                         Version / Role
-Backend              Java Development Kit (JDK)         17+
+---
 
-Framework            Spring Boot                        3+
-
-Web                  SpringMVC                          Controller, Session Management
-
-Templating           Thymeleaf                          Dynamic HTML generation
-
-Data                 Jackson                            JSON serialization/deserialization
- 
-
-\## Getting Started
-
+## Getting Started
 
 Follow these steps to get the application up and running locally.
 
-1\. Prerequisites
+### 1.Prerequisites
 
 Make sure you have the following installed on your machine:
 
-Java Development Kit (JDK): Version 17 or later.
+- **Java Development Kit (JDK):** Version 17 or later  
+- **Apache Maven:** Installed, or use an IDE with built-in Maven support
 
-Apache Maven: (If not using an IDE with built-in Maven support).
+---
 
+### 2.Build and Run
 
+#### Step 1: Navigate to the project root (where `pom.xml` is located):
 
-2\. Build and Run
+```bash
+cd path/to/your/project
+```
 
-&nbsp;  2.1. Navigate to the root directory of the project (where the pom.xml file is located) in your terminal.
+#### Step 2: Ensure the quiz data file exists:
+```
+src/main/resources/quiz.json
+```
 
-&nbsp;  2.2. Ensure the quiz data file (quiz.json) is present in the src/main/resources directory.
+#### Step 3: Build and run the Spring Boot application
 
-&nbsp;  2.3. Build and run the Spring Boot application using the Maven wrapper:
-
-
-
-Bash
-
-# Build the project (optional, if needed)
-
+```bash
+# (Optional) Build the project
 mvn clean install
 
-
-
-\# Start the application
-
+# Start the application
 mvn spring-boot:run
+```
 
+---
 
+### 3. Access the Application
 
-3\. Access the Application
+Once the application starts (typically runs on port **8080**), open your browser and go to:
 
+ [http://localhost:8080/](http://localhost:8080/)
 
+---
 
-Once the application starts (it typically runs on port 8080), open your web browser and navigate to:
+## Code Highlights
 
-http://localhost:8080/
+| Feature | File / Location | Implementation Detail |
+|----------|------------------|------------------------|
+| **Interactive Timer** | `QuizController.java` (`displayQuiz`) | Calculates `remainingSeconds` using `System.currentTimeMillis()` and `HttpSession` attributes |
+| **Client Countdown** | `quiz-single-question.html` | JavaScript uses `setInterval()` to countdown from the server-supplied `remainingSeconds` value |
+| **Question Shuffling** | `QuizService.java` (`shuffleQuiz`) | Uses `Collections.shuffle()` twice — once for the main question list and once for the options within each question |
+| **Navigation Logic** | `QuizController.java` (`handleAnswer`) | Processes the action (*next* or *previous*) and redirects with updated `?index=` parameter |
+| **Styling** | `style.css` | Implements the dark purple theme (`#2a2958`, `#3b3a72`) and styles for the timer and results area |
 
+---
 
+## Author
 
+**Simeon Petrov**  
 
-\## Code Highlights
-
-
-
-Feature              File / Location                   Implementation Detail
-
-
-
-Interactive          QuizController.java               Calculates remainingSeconds using
-Timer                  (displayQuiz)                   System.currentTimeMillis() and
-						       HttpSession attributes. 
-
-
-
-Interactive          quiz-single-                      JavaScript uses setInterval to countdown from
-Timer		     question.html	               the server-supplied remainingSeconds value.
-
-
-
-Question             QuizService.java                  Uses Collections.shuffle() twice: once for the
-Shuffling            (shuffleQuiz)                     main question list and again for the options within each
-
-&nbsp;                                                      question
-
-&nbsp;                                                      
-
-Navigation           QuizController.java               Processes the action (next or previous) and
-Logic                (handleAnswer)                    redirects to the new ?index= parameter.
-
-
-
-Styling              style.css                         Defines the dark theme (#2a2958 and #3b3a72)
-
-&nbsp;                                                      and specific styles for the timer (#timer-
-
-&nbsp;                                                      container) and results area.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-
+---
