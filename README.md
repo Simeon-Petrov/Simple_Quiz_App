@@ -16,7 +16,7 @@ The quiz loads questions from a JSON file, features advanced **time management**
   Quiz start time is tracked using `HttpSession` to ensure the countdown remains accurate even when navigating between questions.
 
 - **Navigation:**  
-  Allows *Next / Previous* / Submit* navigation between questions.
+  Allows *Next / Previous* / *Submit* navigation between questions.
 
 - **Progress Tracking:**  
   Displays progress as **"Question X of Y"**.
@@ -62,7 +62,7 @@ Make sure you have the following installed on your machine:
 #### Step 1: Navigate to the project root (where `pom.xml` is located):
 
 ```bash
-cd path/to/your/project
+cd https://github.com/Simeon-Petrov/Simple_Quiz_App/blob/main/pom.xml
 ```
 
 #### Step 2: Ensure the quiz data file exists:
