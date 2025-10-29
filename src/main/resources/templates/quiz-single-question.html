@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Quiz</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<div class="main-container">
+
+    <h1>Spring MVC Quiz</h1>
+
+    <div id="timer-container">
+        Time Remaining: <span id="countdown"
+                              th:text="${#numbers.formatInteger(remainingSeconds / 60, 1) + ':' + #numbers.formatInteger(remainingSeconds % 60, 2)}">10:00</span>
+    </div>
+    <form method="POST" th:action="@{/answer}">
+
+        <input type="hidden" name="currentIndex" th:value="${currentIndex}"/>
+
+        <div style="font-size: 1.1em; margin-bottom: 20px;">
+            Questions <strong th:text="${currentIndex + 1}">1</strong> of <strong th:text="${totalQuestions}">5</strong>
+        </div>
+
+        <div th:object="${currentQuestion}">
+            <h2 th:text="${(currentIndex + 1) + '. ' + currentQuestion.text}">Question text placeholder</h2>
+
+            <div th:each="option, j : *{options}">
+                <label>
+                    <input type="radio"
+                           name="answer"
+                           th:value="${j.index}"
+                           th:checked="${selectedAnswer == j.index}"
+                           required/>
+
+                    <strong th:text="${T(java.lang.Character).toString(T(java.lang.Character).forDigit(j.index + 10, 36)).toLowerCase() + '. '}">a.</strong>
+                    <span th:text="${option}">Option text placeholder</span>
+                </label><br/>
+            </div>
+            <br/>
+        </div>
+
+        <div>
+            <button th:if="${currentIndex > 0}" type="submit" name="action" value="previous">Previous</button>
+
+            <button th:if="${currentIndex + 1 < totalQuestions}" type="submit" name="action" value="next">Next</button>
+
+            <button th:if="${currentIndex + 1 == totalQuestions}" type="submit" name="action" value="submit">Submit
+                Quiz
+            </button>
+        </div>
+    </form>
+
+    <script th:inline="javascript">
+        var totalTime = [[${remainingSeconds}]];
+
+        var countdownDisplay = document.getElementById('countdown');
+        var quizForm = document.querySelector('form');
+
+        function formatTime(totalSeconds) {
+            var minutes = Math.floor(totalSeconds / 60);
+            var seconds = totalSeconds % 60;
+            return minutes + ':' + (seconds < 10 ? '0' + seconds : seconds);
+        }
+
+        if (totalTime <= 0) {
+            countdownDisplay.textContent = '0:00';
+
+            var hiddenAction = document.createElement('input');
+            hiddenAction.type = 'hidden';
+            hiddenAction.name = 'action';
+            hiddenAction.value = 'submit';
+            quizForm.appendChild(hiddenAction);
+
+            quizForm.submit();
+        }
+
+        function startTimer() {
+            var timerInterval = setInterval(function() {
+
+                totalTime--;
+
+                countdownDisplay.textContent = formatTime(totalTime);
+
+                if (totalTime <= 0) {
+                    clearInterval(timerInterval);
+
+                    alert("Time is up! Submitting your answers.");
+
+                    var hiddenAction = document.createElement('input');
+                    hiddenAction.type = 'hidden';
+                    hiddenAction.name = 'action';
+                    hiddenAction.value = 'submit';
+                    quizForm.appendChild(hiddenAction);
+
+                    quizForm.submit();
+                }
+            }, 1000);
+        }
+
+        if (totalTime > 0) {
+            startTimer();
+        }
+    </script>
+
+</div>
+</body>
+</html>

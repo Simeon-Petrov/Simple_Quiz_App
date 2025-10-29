@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #2a2958;
+    color: #f4f4f4;
+}
+
+.main-container {
+    background-color: #3b3a72;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    min-height: 90vh;
+}
+
+#timer-container {
+    font-size: 1.2em;
+    color: red;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+}
+
+h1 {
+    color: #000000;
+    border-bottom: 2px solid #000000;
+    background-color: #ffffff;
+    padding: 10px;
+    margin-top: 0;
+    border-radius: 4px;
+}
+
+h2, .question-block h3, .question-block h4 {
+    color: #ffffff;
+}
+.question-block {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin: 10px 0;
+    padding: 12px;
+    background-color: #3b3a72;
+    border-radius: 6px;
+    border: 1px solid #555588;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+label:hover {
+    background-color: #4c4a9a;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+button, .button, a.button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+button:hover, .button:hover, a.button:hover {
+    background-color: #0056b3;
+}
+
+.incorrect-answer-container {
+    background-color: #3b3a72;
+    border: none;
+    margin-bottom: 25px;
+    padding: 15px;
+    border-radius: 5px;
+}
+.incorrect-answer-container p {
+    margin: 5px 0;
+}
+.incorrect-answer-container .your-answer, .incorrect-answer-container .correct-answer {
+    font-weight: bold;
+}
+.incorrect-answer-container .your-answer {
+    color: #ff6666;
+}
+.incorrect-answer-container .correct-answer {
+    color: #66ff66;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quiz Results</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<div class="main-container">
+
+    <h1>Quiz Results</h1>
+    <hr/>
+
+    <h2>Your Score:</h2>
+    <p th:text="|You got ${score} out of ${totalQuestions} correct!|">You got X out of Y correct!</p>
+
+    <h3 th:text="${message}">Try again!</h3>
+
+    <a th:href="@{/}" class="button">Retake Quiz</a>
+
+    <div th:if="${not #lists.isEmpty(incorrectAnswers)}">
+        <hr/>
+        <h2>Incorrect Answers:</h2>
+
+        <div th:each="error, iterStat : ${incorrectAnswers}" class="incorrect-answer-container">
+            <h4 th:text="|${iterStat.count}. ${error.questionText}|">1. Question Text?</h4>
+
+            <p class="your-answer">
+                Your Answer: <span th:text="${error.selectedAnswer}">Selected text</span>
+            </p>
+
+            <p class="correct-answer">
+                Correct Answer: <span th:text="${error.correctAnswer}">Correct text</span>
+            </p>
+
+        </div>
+    </div>
+
+</div> </body>
+</html>
